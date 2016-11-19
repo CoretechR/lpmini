@@ -7,6 +7,12 @@ uint8_t dectobcd(const uint8_t val){  // Convert Decimal to Binary Coded Decimal
 uint8_t bcdtodec(const uint8_t val){  // Convert Binary Coded Decimal to Decimal
 	return ((val/16*10)+(val%16));
 }
+/*
+* LP Mini Library
+* Date: 18-11-2016
+* Author: Maximilian Kern
+* Hackaday io: https://hackaday.io/project/16724-lp-mini
+*/
 
 void lpmini_getTime(struct time *t){ // read time from RTC
       
