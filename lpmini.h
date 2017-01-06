@@ -26,6 +26,8 @@ void lpmini_setAlm0();
 
 void lpmini_resetAlm0();
 
-void lpmini_delay(unsigned int seconds);
+void lpmini_delay_s(unsigned int seconds);
+
+void lpmini_delay_min(unsigned int minutes);
 
 void lpmini_init();

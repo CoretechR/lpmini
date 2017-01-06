@@ -76,7 +76,7 @@ void lpmini_resetAlm0(){
   
 }
 
-void lpmini_delay(unsigned int seconds){ // 1-60sec
+void lpmini_delay_s(unsigned int seconds){ // 1-60 sec
 
 	time tn;
 	lpmini_getTime(&tn);
@@ -91,6 +91,29 @@ void lpmini_delay(unsigned int seconds){ // 1-60sec
 	Wire.beginTransmission(mcp79410_ADD);
 	Wire.write(0x0D); // Alm0 Mask Reg
 	Wire.write(0b00000000);
+	Wire.endTransmission();
+
+	Wire.beginTransmission(mcp79410_ADD);
+	Wire.write(0x07); // Control Reg
+	Wire.write(0b00010000); // enable Alm0
+	Wire.endTransmission();
+}
+
+void lpmini_delay_min(unsigned int minutes){ // 1-60 min
+
+	time tn;
+	lpmini_getTime(&tn);
+	minutes += tn.min;
+	if(minutes>=60) minutes -= 60;
+  
+	Wire.beginTransmission(mcp79410_ADD);
+	Wire.write(0x0B); // Alm0 Reg
+	Wire.write(dectobcd(minutes) & 0x7f);
+	Wire.endTransmission();
+
+	Wire.beginTransmission(mcp79410_ADD);
+	Wire.write(0x0D); // Alm0 Mask Reg
+	Wire.write(0b00010000); // minutes match
 	Wire.endTransmission();
 
 	Wire.beginTransmission(mcp79410_ADD);
