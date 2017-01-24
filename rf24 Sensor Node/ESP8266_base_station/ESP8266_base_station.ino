@@ -21,6 +21,7 @@ void setup() {
   Serial.begin(9600);
   while(! Serial);
   Serial.println("\n\nConnecting to Adafruit IO");
+  WiFi.enableAP(false); // makes sure ESP is not visible as wifi ap
   io.connect();
   
   radio.begin();
